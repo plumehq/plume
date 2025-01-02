@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import * as React from 'react';
+import * as React from "react";
 
-import { AIChatPlugin, useEditorChat } from '@udecode/plate-ai/react';
+import { AIChatPlugin, useEditorChat } from "@udecode/plate-ai/react";
 import {
   type SlateEditor,
   type TElement,
@@ -12,33 +12,33 @@ import {
   isElementEmpty,
   isHotkey,
   isSelectionAtBlockEnd,
-} from '@udecode/plate-common';
+} from "@udecode/plate-common";
 import {
   toDOMNode,
   useEditorPlugin,
   useHotkeys,
-} from '@udecode/plate-common/react';
+} from "@udecode/plate-common/react";
 import {
   BlockSelectionPlugin,
   useIsSelecting,
-} from '@udecode/plate-selection/react';
-import { Loader2Icon } from 'lucide-react';
+} from "@udecode/plate-selection/react";
+import { Loader2Icon } from "lucide-react";
 
-import { useChat } from '@/components/editor/use-chat';
+import { useChat } from "@/components/editor/use-chat";
 
-import { AIChatEditor } from './ai-chat-editor';
-import { AIMenuItems } from './ai-menu-items';
-import { Command, CommandList, InputCommand } from './command';
-import { Popover, PopoverAnchor, PopoverContent } from './popover';
+import { AIChatEditor } from "./ai-chat-editor";
+import { AIMenuItems } from "./ai-menu-items";
+import { Command, CommandList, InputCommand } from "./command";
+import { Popover, PopoverAnchor, PopoverContent } from "./popover";
 
 export function AIMenu() {
   const { api, editor, useOption } = useEditorPlugin(AIChatPlugin);
-  const open = useOption('open');
-  const mode = useOption('mode');
+  const open = useOption("open");
+  const mode = useOption("mode");
   const isSelecting = useIsSelecting();
 
   const aiEditorRef = React.useRef<SlateEditor | null>(null);
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState("");
 
   const chat = useChat();
 
@@ -68,7 +68,7 @@ export function AIMenu() {
     onOpenChange: (open) => {
       if (!open) {
         setAnchorElement(null);
-        setInput('');
+        setInput("");
       }
     },
     onOpenCursor: () => {
@@ -88,7 +88,7 @@ export function AIMenu() {
   });
 
   useHotkeys(
-    'meta+j',
+    "meta+j",
     () => {
       api.aiChat.show();
     },
@@ -97,7 +97,7 @@ export function AIMenu() {
 
   return (
     <Popover open={open} onOpenChange={setOpen} modal={false}>
-      <PopoverAnchor virtualRef={{ current: anchorElement }} />
+      <PopoverAnchor virtualRef={{ current: anchorElement as HTMLElement }} />
 
       <PopoverContent
         className="border-none bg-transparent p-0 shadow-none"
@@ -122,14 +122,14 @@ export function AIMenu() {
           value={value}
           onValueChange={setValue}
         >
-          {mode === 'chat' && isSelecting && messages.length > 0 && (
+          {mode === "chat" && isSelecting && messages.length > 0 && (
             <AIChatEditor aiEditorRef={aiEditorRef} />
           )}
 
           {isLoading ? (
             <div className="flex grow select-none items-center gap-2 p-2 text-sm text-muted-foreground">
               <Loader2Icon className="size-4 animate-spin" />
-              {messages.length > 1 ? 'Editing...' : 'Thinking...'}
+              {messages.length > 1 ? "Editing..." : "Thinking..."}
             </div>
           ) : (
             <InputCommand
@@ -137,11 +137,11 @@ export function AIMenu() {
               className="rounded-none border-b border-solid border-border [&_svg]:hidden"
               value={input}
               onKeyDown={(e) => {
-                if (isHotkey('backspace')(e) && input.length === 0) {
+                if (isHotkey("backspace")(e) && input.length === 0) {
                   e.preventDefault();
                   api.aiChat.hide();
                 }
-                if (isHotkey('enter')(e) && !e.shiftKey && !value) {
+                if (isHotkey("enter")(e) && !e.shiftKey && !value) {
                   e.preventDefault();
                   void api.aiChat.submit();
                 }

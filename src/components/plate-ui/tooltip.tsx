@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React from 'react';
+import React from "react";
 
-import * as TooltipPrimitive from '@radix-ui/react-tooltip';
-import { withCn, withProps } from '@udecode/cn';
+import * as TooltipPrimitive from "@radix-ui/react-tooltip";
+import { withCn, withProps } from "@udecode/cn";
 
 export const TooltipProvider = withProps(TooltipPrimitive.Provider, {
   delayDuration: 0,
@@ -21,26 +21,28 @@ export const TooltipContent = withCn(
   withProps(TooltipPrimitive.Content, {
     sideOffset: 4,
   }),
-  'z-50 overflow-hidden rounded-md bg-black px-3 py-1.5 text-sm font-semibold text-white shadow-md'
+  "z-50 overflow-hidden rounded-md bg-black px-3 py-1.5 text-sm font-semibold text-white shadow-md"
 );
 
 export function withTooltip<
-  T extends React.ComponentType<any> | keyof HTMLElementTagNameMap,
+  T extends React.ComponentType<any> | keyof React.JSX.IntrinsicElements
 >(Component: T) {
   return React.forwardRef<
-    React.ElementRef<T>,
+    T extends keyof React.JSX.IntrinsicElements
+      ? React.JSX.IntrinsicElements[T]
+      : React.ComponentType<any>,
     {
       tooltipContentProps?: Omit<
         React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>,
-        'children'
+        "children"
       >;
       tooltipProps?: Omit<
         React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Root>,
-        'children'
+        "children"
       >;
       tooltip?: React.ReactNode;
     } & React.ComponentPropsWithoutRef<T> &
-      Omit<TooltipPrimitive.TooltipProviderProps, 'children'>
+      Omit<TooltipPrimitive.TooltipProviderProps, "children">
   >(function ExtendComponent(
     {
       delayDuration = 0,
