@@ -15,9 +15,13 @@ const eslintConfig = [
     rules: {
       "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-unused-vars": "warn",
+      "@typescript-eslint/no-unused-expressions": "off",
+      "@typescript-eslint/no-empty-object-type": "off",
       "react/display-name": "off",
       "react/no-unescaped-entities": "off",
       "@next/next/no-img-element": "warn",
+      "tailwindcss/no-custom-classname": "off",
+      "react-hooks/exhaustive-deps": "warn",
     },
   },
 ];
