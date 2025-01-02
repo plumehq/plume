@@ -17,7 +17,7 @@ export function Hero() {
             </h1>
             <p className="mt-8 text-pretty text-lg font-medium text-gray-500 sm:text-xl/8">
               Focus on what matters - writing great content and growing your
-              audience, we'll handle the rest.
+              audience, we&apos;ll handle the rest.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <Button size="lg" variant="default">
