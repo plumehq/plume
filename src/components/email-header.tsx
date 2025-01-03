@@ -2,7 +2,7 @@ import React from "react";
 
 export function EmailHeader() {
   return (
-    <div className="p-4 pl-[72px] border-b border-gray-200">
+    <div className="p-4 border-b border-gray-200">
       <div className="grid grid-cols-[80px_1fr] gap-x-8 gap-y-6">
         <label className="text-sm font-medium text-gray-600">Subject</label>
         <input
