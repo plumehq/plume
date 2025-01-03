@@ -30,15 +30,7 @@ export default function Example() {
 
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-gray-50">
-        <body class="h-full">
-        ```
-      */}
-      <div>
+      <div className="min-h-screen bg-[#FAFAFA]">
         <Dialog
           open={sidebarOpen}
           onClose={setSidebarOpen}
@@ -212,12 +204,8 @@ export default function Example() {
           </div>
         </div>
 
-        <div
-          className={cn(
-            "lg:pl-20 transition-[padding] duration-300",
-            isExpanded && "lg:pl-72"
-          )}
-        >
+        {/* Main content area */}
+        <div className="lg:pl-0">
           <div className="sticky top-0 z-40 flex items-center gap-x-6 bg-white px-4 py-4 shadow-sm sm:px-6 lg:hidden">
             <button
               type="button"
@@ -240,21 +228,28 @@ export default function Example() {
             </a>
           </div>
 
-          <main className="py-10">
-            <div className="px-4 sm:px-6 lg:px-8">
-              <div className="mx-auto max-w-5xl rounded-lg border border-gray-200 bg-white shadow-sm">
-                <div
-                  className="h-[800px] w-full overflow-y-auto p-4"
-                  data-registry="plate"
-                >
-                  <SettingsProvider>
-                    <PlateEditor />
-                  </SettingsProvider>
-                  <Toaster />
+          <div
+            className={cn(
+              "transition-[padding] duration-300",
+              isExpanded ? "lg:pl-72" : "lg:pl-20"
+            )}
+          >
+            <main className="py-10">
+              <div className="px-4 sm:px-6 lg:px-8">
+                <div className="mx-auto max-w-4xl rounded-lg border border-gray-200 bg-white shadow-sm">
+                  <div
+                    className="h-[800px] w-full overflow-y-auto p-4"
+                    data-registry="plate"
+                  >
+                    <SettingsProvider>
+                      <PlateEditor />
+                    </SettingsProvider>
+                    <Toaster />
+                  </div>
                 </div>
               </div>
-            </div>
-          </main>
+            </main>
+          </div>
         </div>
       </div>
     </>
