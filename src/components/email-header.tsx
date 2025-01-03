@@ -8,7 +8,7 @@ export function EmailHeader() {
         <input
           type="text"
           className="text-sm text-gray-400 focus:outline-none"
-          defaultValue="Craft Simple Email Templates."
+          placeholder="Enter a catchy subject line"
         />
 
         <label className="text-sm font-medium text-gray-600">
@@ -17,7 +17,7 @@ export function EmailHeader() {
         <input
           type="text"
           className="text-sm text-gray-400 focus:outline-none"
-          defaultValue="Preview text"
+          placeholder="Add a brief preview text"
         />
       </div>
     </div>
