@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { Loader2 } from "lucide-react";
 import { Button } from "@/components/button";
@@ -8,7 +8,7 @@ import { FeatherLogo } from "@/components/logo/feather";
 import { createClient } from "@/lib/supabase/client";
 import { Toaster, toast } from "sonner";
 
-export default function SignUp() {
+function SignUpContent() {
   const [isGoogleLoading, setIsGoogleLoading] = useState<boolean>(false);
   const supabase = createClient();
   const searchParams = useSearchParams();
@@ -162,5 +162,13 @@ export default function SignUp() {
         </div>
       </div>
     </>
+  );
+}
+
+export default function SignUp() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SignUpContent />
+    </Suspense>
   );
 }
