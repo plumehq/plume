@@ -20,9 +20,7 @@ function SignUpContent() {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: `${window.location.origin}/auth/callback${
-            next ? `?next=${encodeURIComponent(next)}` : ""
-          }`,
+          redirectTo: `${window.location.origin}${next || "/dashboard"}`,
         },
       });
       if (error) throw error;
