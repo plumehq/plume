@@ -20,7 +20,13 @@ function SignUpContent() {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: `${window.location.origin}${next || "/dashboard"}`,
+          redirectTo: `${window.location.origin}/api/auth/callback${
+            next
+              ? `?next=${encodeURIComponent(
+                  next
+                )}&action=sign-up&next=/onboarding`
+              : "?action=sign-up&next=/onboarding"
+          }`,
         },
       });
       if (error) throw error;
@@ -148,11 +154,11 @@ function SignUpContent() {
             </div>
           </div>
 
-          <p className="mt-10 text-center text-sm/6 text-gray-700 underline">
+          <p className="mt-10 text-center text-sm/6 text-gray-700">
             Already have an account?{" "}
             <a
               href="/sign-in"
-              className="font-semibold text-indigo-600 hover:text-indigo-500"
+              className="font-semibold text-gray-900 hover:text-gray-700"
             >
               Sign in
             </a>
